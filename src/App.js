@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Tweet from './components/Tweet';
 import './App.css';
+import scheduleTweets from './services/schedule-tweets';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      interval: 5,
+      interval: 2,
       tweets: [
         {}
       ]
@@ -31,7 +32,9 @@ class App extends Component {
 
   schedule = (e) => {
     e.preventDefault();
-    console.log(this.state.tweets);
+    let { tweets, interval } = this.state;
+    console.log(tweets, interval);
+    scheduleTweets(tweets, interval);
   }
 
   render() {
