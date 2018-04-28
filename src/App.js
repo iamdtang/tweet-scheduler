@@ -1,34 +1,43 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
+import Tweet from './components/Tweet';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      interval: 5,
       tweets: [
         {}
       ]
     };
   }
 
-  addTweet = (tweet) => {
+  addTweet = () => {
     this.setState({
-      tweets: this.state.tweets.concat(tweet)
+      tweets: this.state.tweets.concat({})
     });
+  }
+
+  updateTweet = (index, newTweetBody) => {
+    let tweets = [...this.state.tweets];
+    tweets[index].body = newTweetBody;
+    this.setState({ tweets });
+  }
+
+  updateInterval = (e) => {
+    this.setState({ interval: e.target.value });
   }
 
   schedule = (e) => {
     e.preventDefault();
+    console.log(this.state.tweets);
   }
 
   render() {
     let tweetRows = this.state.tweets.map((tweet, i) => {
-      let id = `tweet-${i}`;
       return (
-        <div key={i} className="mb-4">
-          <textarea id={id} placeholder="Write tweet here" className="block border w-full mb-3"></textarea>
-        </div>
+        <Tweet key={i} index={i} tweet={tweet} onChange={this.updateTweet} />
       );
     });
 
@@ -47,7 +56,12 @@ class App extends Component {
             </div>
             <div className="mt-4 mb-4">
               <label htmlFor="interval" className="block mb-3">Interval (minutes)</label>
-              <input type="number" id="interval" className="block appearance-none border w-full py-2 px-3 text-grey-darker" />
+              <input
+                type="number"
+                id="interval"
+                className="block appearance-none border w-full py-2 px-3 text-grey-darker"
+                value={this.state.interval}
+                onChange={this.updateInterval} />
             </div>
             <button type="submit" className="btn btn-blue">Schedule</button>
           </form>
