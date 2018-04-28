@@ -26,26 +26,29 @@ class App extends Component {
     let tweetRows = this.state.tweets.map((tweet, i) => {
       let id = `tweet-${i}`;
       return (
-        <div key={i}>
-          <label htmlFor={id}>Tweet</label>
-          <textarea id={id}></textarea>
+        <div key={i} className="mb-4">
+          <label htmlFor={id} className="block mb-3">Tweet</label>
+          <textarea id={id} placeholder="Write tweet here" className="block border w-full mb-3"></textarea>
         </div>
       );
     });
 
     return (
-      <div className="App">
-        <header>
-          <h1>Tweet Scheduler</h1>
+      <div>
+        <header className="bg-grey-darkest text-white">
+          <h1 className="p-4">Tweet Scheduler</h1>
         </header>
-        <main>
+        <main className="p-4">
           <form onSubmit={this.schedule}>
             {tweetRows}
-            <button type="button" className="btn btn-blue" onClick={this.addTweet}>Add another tweet</button>
-
             <div>
-              <label htmlFor="interval">Interval</label>
-              <input type="number" id="interval" />
+              <button type="button" className="text-orange underline" onClick={this.addTweet}>
+                Add another tweet
+              </button>
+            </div>
+            <div className="mt-4 mb-4">
+              <label htmlFor="interval" className="block mb-3">Interval (minutes)</label>
+              <input type="number" id="interval" className="block appearance-none border w-full py-2 px-3 text-grey-darker" />
             </div>
             <button type="submit" className="btn btn-blue">Schedule</button>
           </form>
