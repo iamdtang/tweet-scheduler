@@ -27,7 +27,6 @@ class App extends Component {
       let id = `tweet-${i}`;
       return (
         <div key={i} className="mb-4">
-          <label htmlFor={id} className="block mb-3">Tweet</label>
           <textarea id={id} placeholder="Write tweet here" className="block border w-full mb-3"></textarea>
         </div>
       );
