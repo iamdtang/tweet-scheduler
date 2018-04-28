@@ -52,9 +52,6 @@ class App extends Component {
             <button type="submit" className="btn btn-blue">Schedule</button>
           </form>
         </main>
-        <footer>
-
-        </footer>
       </div>
     );
   }
